@@ -1,0 +1,59 @@
+
+
+results=[conditions,aware',rt',responses'];
+
+
+
+
+
+
+
+
+
+if nblock==1;
+results=[conditions,aware',rt',responses'];
+
+InputDataStruct.DATA= results;
+
+
+AWARE='BLOCK1'
+A=strcat(filename2,AWARE);
+
+
+text='BLOCK1';
+y=strcat(filename,text);
+
+filename3=char(y)
+dlmwrite(filename3,results)
+
+
+save(A,'InputDataStruct')
+
+
+
+elseif nblock==2;
+
+    results=[conditions,aware',rt',responses'];
+
+results;
+filename2=char(filename);
+
+InputDataStruct.DATA= results;
+
+
+AWARE='BLOCK2'
+A=strcat(filename2,AWARE);
+
+
+text='BLOCK2';
+y=strcat(filename,text);
+
+filename3=char(y)
+dlmwrite(filename3,results)
+
+
+save(A,'InputDataStruct')
+
+end
+
+ clear all;
