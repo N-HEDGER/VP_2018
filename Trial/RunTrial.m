@@ -105,7 +105,7 @@ elseif conditions(i,2)==1
         %     all others
         
     else
-        log_txt=sprintf(text.debugformat,i,text.preslabel{conditions(i,2)},text.expressionlabel{conditions(i,3)},text.trialtypelabel{conditions(i,4)},text.stimposlabel{conditions(i,5)},text.probeposlabel{conditions(i,6)},Model(i),const.maskdur(conditions(i,7)));
+        log_txt=sprintf(text.debugformat,i,text.preslabel{conditions(i,2)},text.expressionlabel{conditions(i,3)},text.trialtypelabel{conditions(i,4)},text.stimposlabel{conditions(i,5)},text.probeposlabel{conditions(i,6)},Model(i),0);
         fprintf(txtfilenamewrite,'%s\n',log_txt);
         %% If it's an emotion bias tial
         t0=GetSecs;
@@ -245,8 +245,9 @@ ShowCursor;
           
     end
 
-
- Screen('Flip', w);
+Screen('Flip', w);
+Screen('DrawTexture', w,frame, [], scr.frame_rect1);
+Screen('Flip', w);
 
 
 
