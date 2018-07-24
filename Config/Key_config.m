@@ -5,6 +5,7 @@ key.R = KbName('RightArrow');
 key.U =KbName('UpArrow');
 key.D =KbName('DownArrow');
 key.ESC =KbName('ESCAPE');
+key.space    =   KbName('Space');
 
 
      

@@ -8,9 +8,8 @@ trialmat=trialmat(trialmat(:,2)<3,:);
 trialmat=trialmat(trialmat(:,3)<3,:);
 trialmat=trialmat(trialmat(:,4)<3,:);
 
-embiasnorm=horzcat(repmat(1,length(trialmat),1),trialmat,repmat(0,length(trialmat),1));
-embiasmasks=horzcat(repmat(2,length(trialmat),1),trialmat,repmat(1,length(trialmat),1));
-embiasmaskl=horzcat(repmat(2,length(trialmat),1),trialmat,repmat(2,length(trialmat),1));
+embiasnorm=horzcat(repmat(1,length(trialmat),1),trialmat,);
+embiasmask=horzcat(repmat(2,length(trialmat),1),trialmat);
 
 
 % Face bias trials
@@ -24,13 +23,9 @@ tempmat=tempmat(tempmat(:,3)<3,:);
 tempmat=tempmat(tempmat(:,4)<3,:);
 
 
-facebiasnorm=horzcat(repmat(1,length(tempmat),1),tempmat,repmat(0,length(tempmat),1));
-facebiasmasks=horzcat(repmat(2,length(tempmat),1),tempmat,repmat(1,length(tempmat),1));
-facebiasmaskl=horzcat(repmat(2,length(tempmat),1),tempmat,repmat(2,length(tempmat),1));
+facebiasnorm=horzcat(repmat(1,length(tempmat),1),tempmat);
+facebiasmask=horzcat(repmat(2,length(tempmat),1),tempmat);
 
-embiasmask=vertcat(embiasmasks,embiasmaskl);
-
-facebiasmask=vertcat(facebiasmasks,facebiasmaskl);
 
 embiasmask_ghost=embiasmask;
 facebiasmask_ghost=facebiasmask;
@@ -43,7 +38,6 @@ conditions=vertcat(embiasnorm,embiasmask,facebiasnorm,facebiasmask,embiasmask_gh
 
 
 conditions=GenerateEventTable(conditions,4,isfixed);
-
 
 else
     conditions=InputDataStruct.conditions;

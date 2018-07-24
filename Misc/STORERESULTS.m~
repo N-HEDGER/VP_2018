@@ -1,3 +1,4 @@
+
 InputDataStruct.conditions=conditions;
 
 InputDataStruct.elapsed=elapsed;
@@ -7,6 +8,7 @@ InputDataStruct.responses=responses;
 InputDataStruct.correct=correct;
 InputDataStruct.rt=rt;
 InputDataStruct.awResp=awResp;
+
 
 results=[conditions,rt',responses',aware',elapsed',awResp'];
 

@@ -1,6 +1,5 @@
 Screen('Preference', 'SkipSyncTests', 1);
 
-
 addpath('Config'); 
 addpath('Stim');
 addpath('Trial');
@@ -35,6 +34,7 @@ if oldsub==0
     responses=zeros(1,length(conditions));
     correct=zeros(1,length(conditions));
     rt=zeros(1,length(conditions));
+    awResp=zeros(1,length(conditions));
 else
     
     log_txt=sprintf(text.formatspecRestart,num2str(clock));
@@ -46,6 +46,7 @@ else
     responses=InputDataStruct.responses;
     correct=InputDataStruct.correct;
     rt=InputDataStruct.rt;
+    awResp=InputDataStruct.awResp;
     
 end
    
@@ -70,12 +71,11 @@ try
     Stim.F=Ftype;
     Stim.H=Htype;
     Stim.N=Ntype;
+    Stim.A=Atype;
     
     
     Screen('TextSize',w,const.textsize);
     Screen('TextFont',w,'Arial Rounded MT Bold');
-    
-    
     
     Screen('DrawText',w,'press any key to begin',scr.rect_1(1),scr.rect_1(2),[255, 255, 255]);
     
@@ -95,8 +95,7 @@ try
     end
     Screen('CloseAll')
     
-    
-    
+   
     if istest==1
         STORERESULTS
     else

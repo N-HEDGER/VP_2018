@@ -27,7 +27,7 @@ if conditions(i,2)==2
         
         Screen('DrawTexture', w, masks2{randi(20)}, [], scr.rect_1);
         Screen('DrawTexture', w, masks2{randi(20)}, [], scr.rect_2);
-        third_onset = Screen('Flip', w,[FlipTimestamp+const.maskdur],[1],1);
+        third_onset = Screen('Flip', w,[FlipTimestamp+const.maskdur(conditions(i,7))],[1],1);
         
         t1=GetSecs;
         elapsed(i)=t1-t0;
@@ -37,7 +37,7 @@ if conditions(i,2)==2
     elseif conditions (i,4)==3
         % Show a normal face on one side and a control on the other
         
-        log_txt=sprintf(text.debugformat,i,text.preslabel{conditions(i,2)},text.expressionlabel{conditions(i,3)},text.trialtypelabel{conditions(i,4)},text.stimposlabel{conditions(i,5)},text.probeposlabel{conditions(i,6)},Model(i));
+        log_txt=sprintf(text.debugformat,i,text.preslabel{conditions(i,2)},text.expressionlabel{conditions(i,3)},text.trialtypelabel{conditions(i,4)},text.stimposlabel{conditions(i,5)},text.probeposlabel{conditions(i,6)},Model(i),const.maskdur(conditions(i,7)));
 
         fprintf(txtfilenamewrite,'%s\n',log_txt);
         
@@ -53,14 +53,14 @@ if conditions(i,2)==2
         Screen('DrawTexture', w, masks2{randi(20)}, [], scr.rect_2);
         
         
-        third_onset = Screen('Flip', w,[FlipTimestamp+const.maskdur],[1],1);
+        third_onset = Screen('Flip', w,[FlipTimestamp+const.maskdur(conditions(i,7))],[1],1);
         t1=GetSecs;
         elapsed(i)=t1-t0;
         
         %% Otherwise it is an emotion bias trial.
         
     else
-        log_txt=sprintf(text.debugformat,i,text.preslabel{conditions(i,2)},text.expressionlabel{conditions(i,3)},text.trialtypelabel{conditions(i,4)},text.stimposlabel{conditions(i,5)},text.probeposlabel{conditions(i,6)},Model(i));
+        log_txt=sprintf(text.debugformat,i,text.preslabel{conditions(i,2)},text.expressionlabel{conditions(i,3)},text.trialtypelabel{conditions(i,4)},text.stimposlabel{conditions(i,5)},text.probeposlabel{conditions(i,6)},Model(i),const.maskdur(conditions(i,7)));
        fprintf(txtfilenamewrite,'%s\n',log_txt);
         % Show a neutral face on one side and a emotional on the other
         
@@ -74,7 +74,7 @@ if conditions(i,2)==2
         Screen('DrawTexture', w, masks2{randi(20)}, [], scr.rect_1);
         Screen('DrawTexture', w, masks2{randi(20)}, [], scr.rect_2);
         
-        third_onset = Screen('Flip', w,[FlipTimestamp+const.maskdur],[1],1);
+        third_onset = Screen('Flip', w,[FlipTimestamp+const.maskdur(conditions(i,7))],[1],1);
         t1=GetSecs;
         elapsed(i)=t1-t0;
         
@@ -84,7 +84,7 @@ if conditions(i,2)==2
     %% If its a standard trial
     
 elseif conditions(i,2)==1
-    log_txt=sprintf(text.debugformat,i,text.preslabel{conditions(i,2)},text.expressionlabel{conditions(i,3)},text.trialtypelabel{conditions(i,4)},text.stimposlabel{conditions(i,5)},text.probeposlabel{conditions(i,6)},Model(i));
+        log_txt=sprintf(text.debugformat,i,text.preslabel{conditions(i,2)},text.expressionlabel{conditions(i,3)},text.trialtypelabel{conditions(i,4)},text.stimposlabel{conditions(i,5)},text.probeposlabel{conditions(i,6)},Model(i),0);
     fprintf(txtfilenamewrite,'%s\n',log_txt);
     %% If it's a baseline tial
     if conditions (i,4)==3
@@ -105,7 +105,7 @@ elseif conditions(i,2)==1
         %     all others
         
     else
-        log_txt=sprintf(text.debugformat,i,text.preslabel{conditions(i,2)},text.expressionlabel{conditions(i,3)},text.trialtypelabel{conditions(i,4)},text.stimposlabel{conditions(i,5)},text.probeposlabel{conditions(i,6)},Model(i));
+        log_txt=sprintf(text.debugformat,i,text.preslabel{conditions(i,2)},text.expressionlabel{conditions(i,3)},text.trialtypelabel{conditions(i,4)},text.stimposlabel{conditions(i,5)},text.probeposlabel{conditions(i,6)},Model(i),const.maskdur(conditions(i,7)));
         fprintf(txtfilenamewrite,'%s\n',log_txt);
         %% If it's an emotion bias tial
         t0=GetSecs;
@@ -190,5 +190,64 @@ end
 
 
 Screen('DrawTexture', w,frame, [], scr.frame_rect1);
+
+
+
+
+ShowCursor;
+    SetMouse(const.awrect(1), const.awrect(2), w);
+    
+    %     Define response range and rescale this to the 1-4 range.
+    
+    range=const.awrect(3)-const.awrect(1);
+    rescaled=linspace(1,4,range);
+    
+    
+    while 1
+        %         Draw tickmarks
+    vect=round(linspace(const.awrect(1),const.awrect(3),4));
+    for tick=vect
+        tick_offset = OffsetRect(const.tick, tick, const.awrect(2)-2);
+        Screen('FillRect', w, const.rectColor, tick_offset);
+    end
+    
+    %     Draw PAS labels and numbers.
+    for txt=1:4
+        DrawFormattedText(w, text.PASlabel{txt},vect(txt)-(0.3*(vect(2)-vect(1))), const.awrect(2)-150, WhiteIndex(w),[],[]);
+        DrawFormattedText(w, num2str(txt),vect(txt), const.awrect(2)+40, WhiteIndex(w),[],[]);
+    end
+    
+    %    Draw the response bar
+    Screen('FillRect', w, const.rectColor, const.awrect);
+    
+    %     Get mouse position and determine whether or not it is in the bar.
+    [mx, my, buttons] = GetMouse(w);
+    inside_bar = IsInRect(mx, my+1, const.awrect);
+    resprect = CenterRectOnPointd(const.selectRect, mx, const.awrect(2)+1);
+   
+    %    Draw slider at new location
+    Screen('FillRect', w, const.blue, resprect);
+    
+    %    Mouse must be clicked, spacebar must be pressed and slider must be
+    %    within response bar range.
+   [KeyIsDown, endrt, KeyCode]=KbCheck;
+   if KeyCode(key.space) && ismember(round(mx),const.awrect(1):const.awrect(3)) && sum(buttons) > 0
+    awResp(i) = rescaled(round(mx)-const.awrect(1));
+       break;
+   end
+   
+   Screen('Flip', w);
+   
+           if sum(buttons) <= 0
+                offsetSet = 0;
+           end
+           
+          
+    end
+
+
+ Screen('Flip', w);
+
+
 
 STORERESULTS

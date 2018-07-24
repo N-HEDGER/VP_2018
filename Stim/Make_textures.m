@@ -77,6 +77,33 @@ end
 
 
 
+for i=1:length(clist);
+    for m=1:length(aups)
+        
+        upp= newimage(aups{m},clist(i));
+        
+        Atype{1,m,i}= Screen('MakeTexture', w, upp);
+    end
+    
+end
+
+
+
+
+for i=1:length(clist);
+    for m=1:length(aips)
+        
+        upp= newimage(aips{m},clist(i));
+        
+        Atype{2,m,i}= Screen('MakeTexture', w, upp);
+    end
+    
+end
+
+
+
+
+
 masks2=cell(1,length(masks))
 
 for i=1:length(masks)

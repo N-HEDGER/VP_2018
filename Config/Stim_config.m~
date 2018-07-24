@@ -55,19 +55,6 @@ parfor (k=1:nimages)
 end
 
 
-% Read in neutral faces
-p = which('au1.jpg');
-filelist = dir([fileparts(p) filesep 'au*.jpg']);
-fileNames = {filelist.name}';
-nimages=length(fileNames);
-
-aups=cell(1,nimages);
-
-parfor (k=1:nimages)
-    aups{k}=imread(fileNames{k});
-end
-
-
 % Inverteds
 
 % Read in fear faces
@@ -107,20 +94,6 @@ nips=cell(1,nimages);
 parfor (k=1:nimages)
     nips{k}=imread(fileNames{k});
 end
-
-
-% Read in neutral faces
-p = which('ai1.jpg');
-filelist = dir([fileparts(p) filesep 'ai*.jpg']);
-fileNames = {filelist.name}';
-nimages=length(fileNames);
-
-aips=cell(1,nimages);
-
-parfor (k=1:nimages)
-    aips{k}=imread(fileNames{k});
-end
-
 
 
 % Questions
@@ -189,7 +162,7 @@ surround=imread('RanDotSurround.bmp','bmp');
   
 % Model
   for c = 1:length(conditions);
-     Model(c)=conditions(c,8);
+     Model(c)=conditions(c,7);
   end
 
 

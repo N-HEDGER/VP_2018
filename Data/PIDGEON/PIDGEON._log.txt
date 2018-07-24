@@ -1,5 +1,0 @@
-Trial 1.000000 : Presentation condition: Masking Expression: Happy Trial type: Inverted Stimulus location: left Probe location: left Model: 4.000000 
-
-Trial 2.000000 : Presentation condition: Normal Expression: Happy Trial type: Baseline Stimulus location: left Probe location: left Model: 2.000000 
-
-Subject quitted at: 2018              7              9             11             26      45.926191

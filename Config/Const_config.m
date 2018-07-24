@@ -2,7 +2,7 @@
 const.dur=0.5;
 
 % Duration of presentation for masked condition.
-const.maskdur=.017;
+const.maskdur=[.017,.033];
 
 % Size of the dot in pixels.
 const.dotsize=15;
