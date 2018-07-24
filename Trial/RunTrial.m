@@ -179,7 +179,6 @@ elseif keyCode(key.D)==1;
     aware(i)=0;
     
 elseif keyCode(key.ESC)==1;
-    
         log_txt=sprintf(text.formatSpecQuit,num2str(clock));
         fprintf(txtfilenamewrite,'%s\n',log_txt);
     
@@ -196,7 +195,9 @@ Screen('DrawTexture', w,frame, [], scr.frame_rect1);
 
 
 ShowCursor(1);
-    SetMouse(const.awrect(1), const.awrect(2), w);
+
+vect=round(linspace(const.awrect(1),const.awrect(3),4));
+    SetMouse((vect(2)+vect(3))/2, const.awrect(2), w);
     
     %     Define response range and rescale this to the 1-4 range.
     
@@ -206,7 +207,7 @@ ShowCursor(1);
     
     while 1
         %         Draw tickmarks
-    vect=round(linspace(const.awrect(1),const.awrect(3),4));
+    
     for tick=vect
         tick_offset = OffsetRect(const.tick, tick, const.awrect(2)-2);
         Screen('FillRect', w, const.rectColor, tick_offset);
@@ -232,7 +233,7 @@ ShowCursor(1);
     %    Mouse must be clicked, spacebar must be pressed and slider must be
     %    within response bar range.
    [KeyIsDown, endrt, KeyCode]=KbCheck;
-   if KeyCode(key.space) && ismember(round(mx),const.awrect(1):const.awrect(3)) && sum(buttons) > 0
+   if KeyCode(key.space) && ismember(round(mx),const.awrect(1)+2:const.awrect(3)-2) && sum(buttons) > 0
     awResp(i) = rescaled(round(mx)-const.awrect(1));
        break;
    end
