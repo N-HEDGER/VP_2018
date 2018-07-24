@@ -46,7 +46,7 @@ const.stimbot=scr.height;
 const.stimright=scr.width;
 
 const.selectRect=[0 0 10 40];
-const.slidebar_xsize=const.stimright/2;
+const.slidebar_xsize=const.stimright/4;
 const.slidebar_ysize=10;
 
 const.progbar_xsize=const.stimright;

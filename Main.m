@@ -86,6 +86,7 @@ try
     WaitSecs(1)
     
     for i = starttrial:numtrials
+
         
         
         RunTrial
@@ -93,6 +94,7 @@ try
         InputDataStruct.trialsdone=i;
         
     end
+    ShowCursor(1);
     Screen('CloseAll')
     
    

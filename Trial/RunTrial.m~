@@ -184,7 +184,6 @@ elseif keyCode(key.ESC)==1;
         fprintf(txtfilenamewrite,'%s\n',log_txt);
     
     STORERESULTS
-    ShowCursor(1);
     clear all
     sca
 end
