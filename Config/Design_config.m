@@ -1,8 +1,12 @@
 % EXP,INV,SL,PL.
 if oldsub==0
 % Emotion bias trials
-trialmat=nchoosek([1,2,1,2,1,2,1,2],4);
+trialmat=nchoosek([1,2,3,1,2,3,1,2,3,1,2,3],4);
 trialmat = unique(trialmat, 'rows');
+
+trialmat=trialmat(trialmat(:,2)<3,:);
+trialmat=trialmat(trialmat(:,3)<3,:);
+trialmat=trialmat(trialmat(:,4)<3,:);
 
 embiasnorm=horzcat(repmat(1,length(trialmat),1),trialmat);
 embiasmask=horzcat(repmat(2,length(trialmat),1),trialmat);
