@@ -84,10 +84,11 @@ if conditions(i,2)==2
     %% If its a standard trial
     
 elseif conditions(i,2)==1
-        log_txt=sprintf(text.debugformat,i,text.preslabel{conditions(i,2)},text.expressionlabel{conditions(i,3)},text.trialtypelabel{conditions(i,4)},text.stimposlabel{conditions(i,5)},text.probeposlabel{conditions(i,6)},Model(i),0);
-    fprintf(txtfilenamewrite,'%s\n',log_txt);
+
     %% If it's a baseline tial
     if conditions (i,4)==3
+  log_txt=sprintf(text.debugformat,i,text.preslabel{conditions(i,2)},text.expressionlabel{conditions(i,3)},text.trialtypelabel{conditions(i,4)},text.stimposlabel{conditions(i,5)},text.probeposlabel{conditions(i,6)},Model(i),0);
+    fprintf(txtfilenamewrite,'%s\n',log_txt);
         t0=GetSecs;
         tic
         while toc<const.dur;
@@ -179,6 +180,7 @@ elseif keyCode(key.D)==1;
     aware(i)=0;
     
 elseif keyCode(key.ESC)==1;
+    InputDataStruct.trialsdone=i;
         log_txt=sprintf(text.formatSpecQuit,num2str(clock));
         fprintf(txtfilenamewrite,'%s\n',log_txt);
     
